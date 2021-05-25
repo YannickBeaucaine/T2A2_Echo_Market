@@ -30,8 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Echo market custom gems
 
-gem 'bootstrap-sass', '~> 3.4.1'
-gem 'sassc-rails', '>= 2.1.0'
+gem 'bootstrap', '~> 4.5.2'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'devise'
