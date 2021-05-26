@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
     def index
-      @listings = Listing.all 
+      @listings = Listing.all
     end
 
     def new
@@ -12,6 +12,7 @@ class ListingsController < ApplicationController
     end
 
     def show
+        @listing = Listing.find(params[:id])
 
     end
 
