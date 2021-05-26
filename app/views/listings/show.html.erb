@@ -1,6 +1,8 @@
 <h1> <%= @listing.name %> </h1>
 <p> <%= @listing.description %></p>
-<ul>
+<%= @listing.images.attached? ? (image_tag @listing.images.first, alt:'Picture of equipment for sale') : (image_tag 'default-image.jpeg', alt: 'No image found') %>
+<ul>   
     <li>Item Condition: <%= @listing.item_condition %> </li>
     <li> Price: <%= number_to_currency(@listing.price) %> </li>
+
 </ul>
