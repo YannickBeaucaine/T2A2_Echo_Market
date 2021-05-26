@@ -6,8 +6,10 @@
             <hr class="my-4">
             <p>Find your new old instrument today!</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Start Browsing</a>
-            </p>
+             <% if user_signed_in? %>
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary" %>
+         <% end %>
+             </p>
          </div>
               <div class="col-md-6">
                 <%= image_tag "coverimage", class: "index-image" %>
