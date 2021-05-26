@@ -1,4 +1,14 @@
 <h1> Add new listing </h1>
 
 <%= form_with model: @listing, local: true do |form| %>
-<%= %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <%= form.label :price %>
+    <%= form.number_field :price, min: 1.00, step: 0.05 %>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+    <%= form.label :item_condition %>
+    <%= form.text_field :item_condition %>
+    
+    <%= form.submit %>
+<% end %> 
