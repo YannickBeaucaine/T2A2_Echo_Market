@@ -5,12 +5,20 @@ class ListingsController < ApplicationController
     def index
       @listings = Listing.all
     end
-    # method to create new items
+    
     def new
       @listing = Listing.new
-
-    end
-
+     end
+    # method to create new items for the user logged in
+     def create
+        @listing = current_user.listings.new(listing_params)
+        if @listing.save
+            redirect_to @listing
+        else 
+            render :new
+        end
+     end
+     
     def edit
         
     end
@@ -18,6 +26,12 @@ class ListingsController < ApplicationController
     def show
         @listing = Listing.find(params[:id])
 
+    end
+    # adding layer of security with srong params to avoid malicious editing
+    private
+
+    def listing_params
+        params.require(:listing).permit(:name,:price,:description,:item_condition)
     end
 
 end
