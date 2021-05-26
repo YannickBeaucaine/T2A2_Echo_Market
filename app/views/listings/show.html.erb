@@ -1,1 +1,6 @@
 <h1> <%= @listing.name %> </h1>
+<p> <%= @listing.description %></p>
+<ul>
+    <li>Item Condition: <%= @listing.item_condition %> </li>
+    <li> Price: <%= number_to_currency(@listing.price) %> </li>
+</ul>
