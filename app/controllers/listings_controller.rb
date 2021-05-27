@@ -12,7 +12,7 @@ class ListingsController < ApplicationController
     # method to create new items for the user logged in
      def create
         @listing = current_user.listings.new(listing_params)
-        @listing.status  = 1
+        # @listing.status  = 1
         if @listing.save
             redirect_to @listing
         else 
