@@ -1,8 +1,47 @@
+<%
+=begin%>
+ # dsiplaying listing name 
+<%
+=end%>
 <h1> <%= @listing.name %> </h1>
+<%
+=begin%>
+ # displaying listing description 
+<%
+=end%>
 <p> <%= @listing.description %></p>
+<%
+=begin%>
+ # display image uploaded by user 
+<%
+=end%>
 <%= @listing.images.attached? ? (image_tag @listing.images.first, alt:'Picture of equipment for sale') : (image_tag 'default-image.jpeg', alt: 'No image found') %>
+<%
+=begin%>
+ # unordered list with item condition and price for listing 
+<%
+=end%>
 <ul>   
     <li>Item Condition: <%= @listing.item_condition %> </li>
     <li> Price: <%= number_to_currency(@listing.price) %> </li>
 </ul>
+<%
+=begin%>
+ # buy now button linked to strip payment with boostrap preset look 
+<%
+=end%>
  <%= button_tag "Buy Now",data: {stripe:'payment', session_id: @session_id, public_key: Rails.application.credentials.dig(:stripe, :public_key)}, class: "btn btn-outline-dark" %>
+
+<%
+=begin%>
+ #connecting button to strip with javascript 
+<%
+=end%>
+<%= javascript_include_tag "https://js.stripe.com/v3" %>
+<%
+=begin%>
+ getting javascript pack tag 
+<%
+=end%>
+<%= javascript_pack_tag "stripe" %>
+

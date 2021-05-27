@@ -35,7 +35,8 @@ class ListingsController < ApplicationController
            name: @listing.name,
            description: @listing.description,
            currency: 'aud',
-           quantity: '1'
+           quantity: '1',
+           images: [@listing.images.first.service_url]
          }],
          payment_intent_data: {
              metadata: {
