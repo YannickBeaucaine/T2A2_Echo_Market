@@ -19,22 +19,23 @@ class ListingsController < ApplicationController
         else 
             render :new
         end
-     end
+    end
      
     def edit
         
     end
     # method to show details of listing activating Stripe
     def show
-        stripe_session = Stripe::Checkout::Session.create( payment_method_types:['card'],
+        stripe_session = Stripe::Checkout::Session.create( 
+         payment_method_types:['card'],
          client_reference_id: current_user.id,
          customer_email: current_user.email,
          line_items:[{
            amount: (@listing.price * 100).to_i, 
            name: @listing.name,
            description: @listing.description,
-           currency: 'aud'
-           quantity: 1
+           currency: 'aud',
+           quantity: '1'
          }],
          payment_intent_data: {
              metadata: {
@@ -42,7 +43,7 @@ class ListingsController < ApplicationController
                  user_id: current_user.id
              }
          },
-         succes_url: "#{root_url}purchases/succes?listingId=#{@listing.id}",
+         success_url: "#{root_url}purchases/success?listingId=#{@listing.id}",
          cancel_url: "#{root_url}listings"
          )
          @session_id = stripe_session.id

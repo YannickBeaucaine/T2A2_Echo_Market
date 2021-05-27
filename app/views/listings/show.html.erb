@@ -5,4 +5,4 @@
     <li>Item Condition: <%= @listing.item_condition %> </li>
     <li> Price: <%= number_to_currency(@listing.price) %> </li>
 </ul>
- <%= button_tag "Buy Now", class: "btn btn-outline-dark" %>
+ <%= button_tag "Buy Now",data: {stripe:'payment', session_id: @session_id, public_key: Rails.application.credentials.dig(:stripe, :public_key)}, class: "btn btn-outline-dark" %>
