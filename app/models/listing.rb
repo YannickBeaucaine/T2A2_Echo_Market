@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
   belongs_to :user
+  has_one :purchase, dependent: :destroy
   has_many_attached :images
   validates :name, :price, :status, presence: true
   enum status: {active: 1, inactive: 2, purchased: 3}
