@@ -1,5 +1,22 @@
 <h1> Add new listing </h1>
 
+<div>
+<%= simple_form_for @listing do |f| %>
+<%= f.input :name %>
+<%= f.input :description %>
+<%= f.input :price %>
+<%= f.input :item_condition, collection: Listing::CONDITION %>
+<%= f.label :images %>
+<%= f.file_field :images, accept: 'image/jpg' %>
+</div>
+<br>
+<%= f.submit %>
+
+<% end %>
+
+<%
+=begin%>
+ 
 <%= form_with model: @listing, local:true do |form| %>
 <div class= 'mb-3'>
     <%= form.label :name %>
@@ -15,4 +32,6 @@
     <%= form.file_field :images, accept: 'image/jpg, image/png, image/jpeg' %>
 
     <%= form.submit %>
-<% end %> 
+<% end %>  
+<%
+=end%>
