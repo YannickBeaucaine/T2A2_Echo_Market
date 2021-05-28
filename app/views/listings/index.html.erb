@@ -1,16 +1,24 @@
 <h1 class="d-flex justify-content-center align-items-center container ">Find your dream gear</h1>
-<%= flash[:alert]%>
+      <div class="d-flex justify-content-center align-items-center container ">
+         <%= form_tag listings_path, method: :get do %>
+            <%= text_field_tag :query, params[:query],
+            placeholder: "Search by name" %>
+               <%= submit_tag "Go" %>
+           <% end %>
+      </div>
+
+<%= flash[:alert] %>
      <% @listings.each do |listing| %>
          <div class="card" style="width: 18rem;">
            <%= image_tag listing.images.first, class: 'card-img-top' %> 
-         <div class="card-body">
-            <h5 class="card-title"><%= listing.name%></h5>
-            <p class="card-text"><%=listing.description %></p>
-            <%= link_to "Show", listing_path(listing.id),class: 'btn btn-outline-dark' %>
-         </div>
+            <div class="card-body">
+               <h5 class="card-title"><%= listing.name%></h5>
+               <p class="card-text"><%=listing.description %></p>
+               <%= link_to "Show", listing_path(listing.id),class: 'btn btn-outline-dark' %>
+            </div>
         </div>
   
      <% end %>
- <br>
+  <br>
 
 <%= link_to "Sell your gear", new_listing_path, class: 'btn btn-outline-dark'  %>

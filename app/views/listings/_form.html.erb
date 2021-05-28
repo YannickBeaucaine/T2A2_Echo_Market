@@ -7,8 +7,8 @@
         <%= f.input :price, min: 1.00 %>
         <%= f.input :item_condition, collection: ["Mint", "Very Good", "Good", "Average", "For parts"] %>
         <%= f.label :images %>
-        <%= f.file_field :images, accept: 'image/jpg' %>
-         <%= f.submit "Submit your gear" %>
+        <%= f.file_field :images %>
+        <%= f.submit "Submit your gear" %>
     </div>
       
 

@@ -4,17 +4,20 @@ class ListingsController < ApplicationController
     before_action:set_listing, only: [:show, :edit, :update, :destroy, :deactivate]
     # shows all listing available 
     def index
-      @listings = Listing.all
+        if params[:query].present?
+             @listings = Listing.search_by_name(params[:query])
+        else
+            @listings = Listing.all
+        end
     end
-    
+   
     def new
       @listing = Listing.new
     end
     # method to create new items for the user logged in
      def create
-        @listing = current_user.listings.new(listing_params)
-        # @listing.status  = 1
-        if @listing.save
+        @listing = current_user.listings.new(listing_params),
+        if listing.save
             redirect_to @listing
         else 
             render :new
