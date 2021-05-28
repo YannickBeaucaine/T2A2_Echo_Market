@@ -1,4 +1,4 @@
-<h1>Listings</h1>
+<h1 class="d-flex justify-content-center align-items-center container ">Find your dream gear</h1>
 <%= flash[:alert]%>
      <% @listings.each do |listing| %>
          <div class="card" style="width: 18rem;">
@@ -13,4 +13,4 @@
      <% end %>
  <br>
 
-<%= link_to "New listing", new_listing_path %>
+<%= link_to "Sell your gear", new_listing_path, class: 'btn btn-outline-dark'  %>

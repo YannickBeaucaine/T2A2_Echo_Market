@@ -13,10 +13,5 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap";
 
- * {
-    font-family: 'Poppins', sans-serif;
-    src:  ('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-   
- }
+ @import "bootstrap";

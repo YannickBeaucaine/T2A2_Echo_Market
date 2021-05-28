@@ -1,19 +1,18 @@
-<div class="jumbotron">
-    <div class="row">
-        <div class="col-md-6">
-            <h1 class="display-4">ECHO</h1>
-            <p class="lead">Vintage Instruments Marketplace</p>
-            <hr class="my-4">
-            <p>Find your new old instrument today!</p>
-            <p class="lead">
-             <% if user_signed_in? %>
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary" %>
-         <% end %>
-             </p>
-         </div>
-              <div class="col-md-6">
-                <%= image_tag "coverimage",alt:'image of a man on stool trying a guitar', class: "index-image" %>
+<div class= "bgimagediv" >
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="display-4">ECHO</h1>
+                <p class="lead"> Vintage Instruments Marketplace</p>
+                <hr class="my-4">
+                <p>Find your new old instrument today!</p>
+                <p class="lead">
+                <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-dark" %>
+               </p>
             </div>
-     </div>
-</div>
-  
+                <div class="col-md-6">
+                  <%= image_tag "coverimage", class: "cover-image" %>
+                </div>
+        </div>
+    </div>
+ </div>
