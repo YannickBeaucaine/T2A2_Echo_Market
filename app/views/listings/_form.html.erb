@@ -5,7 +5,7 @@
 <%= f.input :name %>
 <%= f.input :description %>
 <%= f.input :price, min: 1.00 %>
-<%= f.input :item_condition, collection: Listing::CONDITION %>
+<%= f.input :item_condition, collection: ["Mint", "Very Good", "Good", "Average", "For parts"] %>
 <%= f.label :images %>
 <%= f.file_field :images, accept: 'image/jpg' %>
 </div>

@@ -1,20 +1,16 @@
 <h1>Listings</h1>
 <%= flash[:alert]%>
-
-<table>
-  <tbody>
-    <% @listings.each do |listing| %>
-      <tr>
-        <td><%= listing.name %></td>
-        <td><%= number_to_currency(listing.price) %></td>
-        <td><%= link_to "Show", listing %></td>
-        <td><%= link_to "Edit", edit_listing_path(listing) %></td>
-        <td><%= link_to "Delete", listing, method: :delete, data: { confirm: "Are you sure?" } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+     <% @listings.each do |listing| %>
+         <div class="card" style="width: 18rem;">
+           <%= image_tag listing.images.first, class: 'card-img-top' %> 
+         <div class="card-body">
+            <h5 class="card-title"><%= listing.name%></h5>
+            <p class="card-text"><%=listing.description %></p>
+            <%= link_to "Show", listing_path(listing.id),class: 'btn btn-outline-dark' %>
+         </div>
+        </div>
+  
+     <% end %>
+ <br>
 
 <%= link_to "New listing", new_listing_path %>
