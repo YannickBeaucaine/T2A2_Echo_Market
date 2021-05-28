@@ -7,9 +7,11 @@
     <li> Price: <%= number_to_currency(@listing.price) %> </li>
     <li> Sold by: <%= @listing.user.email %> </li>
 </ul>
-<%= button_tag "Buy Now",data: {stripe:'payment', session_id: @session_id, public_key: Rails.application.credentials.dig(:stripe, :public_key)}, class: "btn btn-outline-dark" %>
-<%= link_to 'Edit', edit_listing_path(@listing), class: 'btn btn-outline-dark' if current_user == @listing.user %>
-<%= link_to 'Remove', listing_path(@listing), method: :delete,data: { confirm: "Are you sure?" }, class: 'btn btn-outline-dark' if current_user == @listing.user %>
+<%= button_tag "Buy Now",disabled: (@listing.status != 'active'),data: {stripe:'payment', session_id: @session_id, public_key: Rails.application.credentials.dig(:stripe, :public_key)}, class: "btn btn-outline-dark" %>
+<% if current_user == @listing.user  %>
+<%= link_to 'Edit', edit_listing_path(@listing), class: 'btn btn-outline-dark' %>
+<%= link_to 'Remove', listing_path(@listing), method: :delete, data:{ confirm: "Are you sure?" },  class: 'btn btn-outline-dark' %>
+<% end %>
 <%= javascript_include_tag "https://js.stripe.com/v3" %>
 <%= javascript_pack_tag "stripe" %>
 

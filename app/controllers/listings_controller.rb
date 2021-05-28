@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
     # only allows access to this page after after logging in
     before_action :authenticate_user!, only: [:new, :edit]
-    before_action:set_listing, only: [:show, :edit, :update, :destroy]
+    before_action:set_listing, only: [:show, :edit, :update, :destroy, :deactivate]
     # shows all listing available 
     def index
       @listings = Listing.all
@@ -9,7 +9,7 @@ class ListingsController < ApplicationController
     
     def new
       @listing = Listing.new
-     end
+    end
     # method to create new items for the user logged in
      def create
         @listing = current_user.listings.new(listing_params)
@@ -62,6 +62,12 @@ class ListingsController < ApplicationController
         @listing.destroy
         flash[:alert] = 'Your listing has been removed'
         redirect_to listings_path
+    end
+    # method to pause listing
+    def deactivate
+        flash[:alert] = 'Unable to pause this item' unless @listing.update(status: 'inactive')
+        
+            redirect_to @listing
     end
     # adding layer of security with srong params to avoid malicious editing
     private

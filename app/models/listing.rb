@@ -5,7 +5,7 @@ class Listing < ApplicationRecord
   has_many_attached :images
   validates :name, :price, :status, presence: true
   validates :item_condition, inclusion: { in: CONDITION }
-  enum status: {active: 1, inactive: 2, purchased: 3}
+  enum status: { active: 1, inactive: 2, purchased: 3 }
   scope :active, -> { where(status: 1) }
   after_initialize :set_default_status
 
