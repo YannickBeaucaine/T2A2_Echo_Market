@@ -22,10 +22,11 @@ class ListingsController < ApplicationController
     end
     # logic controller method to edit listed item 
     def edit
-        
+        authorize! :update, @listing
     end
     # logic controller to update listed item
     def update
+        authorize! :update, @listing,
        if @listing.update(listing_params)
         redirect_to @listing
        else
@@ -34,6 +35,7 @@ class ListingsController < ApplicationController
     end
     # method to show details of listing activating Stripe
     def show
+        
         stripe_session = Stripe::Checkout::Session.create( 
          payment_method_types:['card'],
          client_reference_id: current_user.id,
@@ -56,18 +58,13 @@ class ListingsController < ApplicationController
          cancel_url: "#{root_url}listings"
          )
          @session_id = stripe_session.id
+         
     end
     # method to delete listed item
     def destroy
         @listing.destroy
         flash[:alert] = 'Your listing has been removed'
         redirect_to listings_path
-    end
-    # method to pause listing
-    def deactivate
-        flash[:alert] = 'Unable to pause this item' unless @listing.update(status: 'inactive')
-        
-            redirect_to @listing
     end
     # adding layer of security with srong params to avoid malicious editing
     private
