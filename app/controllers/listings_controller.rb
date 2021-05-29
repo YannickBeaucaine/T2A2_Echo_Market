@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
     # only allows access to this page after after logging in
     before_action :authenticate_user!, only: [:new, :edit]
     before_action:set_listing, only: [:show, :edit, :update, :destroy, :deactivate]
-    # shows all listing available 
+    # shows all listing available and adds method to search function
     def index
         if params[:query].present?
              @listings = Listing.search_by_name(params[:query])
@@ -14,22 +14,25 @@ class ListingsController < ApplicationController
     def new
       @listing = Listing.new
     end
-    # method to create new items for the user logged in
+    # method to create new listing for the user logged in
      def create
-        @listing = current_user.listings.new(listing_params),
-        if listing.save
+        @listing = current_user.listings.new(listing_params)
+        if @listing.save
             redirect_to @listing
-        else 
+            flash[:success] = "Listing was successfully created."
+        else
             render :new
         end
-    end
+     end
+  
+    
     # logic controller method to edit listed item 
     def edit
         authorize! :update, @listing
     end
     # logic controller to update listed item
     def update
-        authorize! :update, @listing,
+        authorize! :update, @listing
        if @listing.update(listing_params)
         redirect_to @listing
        else
@@ -69,13 +72,16 @@ class ListingsController < ApplicationController
         flash[:alert] = 'Your listing has been removed'
         redirect_to listings_path
     end
+
+    def set_listing
+        @listing = Listing.find(params[:id])
+    end
     # adding layer of security with srong params to avoid malicious editing
+    
     private
 
     def listing_params
         params.require(:listing).permit(:name,:price,:description,:item_condition,:images)
     end
-    def set_listing
-        @listing = Listing.find(params[:id])
-    end
+  
 end
