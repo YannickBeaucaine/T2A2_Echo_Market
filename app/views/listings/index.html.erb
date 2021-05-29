@@ -15,7 +15,7 @@
                <h5 class="card-title"><%= listing.name%></h5>
                <p class="card-text"><%=listing.description %></p>
                <p class="card-text"><%=number_to_currency(listing.price) %></p>
-               <%= link_to "Show", listing_path(listing.id),class: 'btn btn-outline-dark' %>
+               <%= link_to "Show", listing_path(listing),class: 'btn btn-outline-dark' %>
             </div>
         </div>
   

@@ -1,22 +1,25 @@
 class ListingsController < ApplicationController
     # only allows access to this page after after logging in
-    before_action :authenticate_user!, only: [:new, :edit]
-    before_action:set_listing, only: [:show, :edit, :update, :destroy, :deactivate]
+    before_action :authenticate_user!, only: [:new, :edit, :create]
+    before_action :set_listing, only: [:show, :edit, :update, :destroy, :deactivate]
     # shows all listing available and adds method to search function
     def index
         if params[:query].present?
              @listings = Listing.search_by_name(params[:query])
         else
-            @listings = Listing.all
+            @listings = Listing.where.not(status: "purchased") 
         end
     end
    
     def new
+
       @listing = Listing.new
+
     end
     # method to create new listing for the user logged in
      def create
-        @listing = current_user.listings.new(listing_params)
+        @listing = current_user.listings.build(listing_params)
+        @listing.status = 1
         if @listing.save
             redirect_to @listing
             flash[:success] = "Listing was successfully created."
@@ -73,15 +76,18 @@ class ListingsController < ApplicationController
         redirect_to listings_path
     end
 
-    def set_listing
-        @listing = Listing.find(params[:id])
-    end
-    # adding layer of security with srong params to avoid malicious editing
     
+  
+  
+    #strong params
     private
 
     def listing_params
         params.require(:listing).permit(:name,:price,:description,:item_condition,:images)
     end
-  
+
+    def set_listing
+        @listing = Listing.find(params[:id])
+    end
+
 end
