@@ -11,10 +11,7 @@ class PurchasesController < ApplicationController
         listing_id = payment.metadata.listing_id
         buyer_id = payment.metadata.user_id
     
-    puts '-' * 20
-    puts listing_id
-    puts buyer_id
-    puts '-' * 20
+
 
 
     Purchase.create(

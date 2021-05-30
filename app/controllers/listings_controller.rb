@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
     # shows all listing available and adds method to search function
     def index
         if params[:query].present?
-             @listings = Listing.search_by_name(params[:query])
+             @listings = Listing.search_by_name(params[:query]).includes(:user)
         else
             @listings = Listing.where.not(status: "purchased") 
         end

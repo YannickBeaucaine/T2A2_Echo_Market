@@ -3,11 +3,12 @@
          <%= form_tag listings_path, method: :get do %>
             <%= text_field_tag :query, params[:query],
             placeholder: "Search by name" %>
-               <%= submit_tag "Go" %>
+            <%= submit_tag "Go", class: 'btn btn-outline-dark'  %>
+            <%= link_to "See all", listings_path, class: 'btn btn-outline-dark'  %>
            <% end %>
       </div>
-
-<%= flash[:alert] %>
+ <br>
+ <div class="card-columns">
      <% @listings.each do |listing| %>
          <div class="card" style="width: 18rem;">
            <%= image_tag listing.images.first, class: 'card-img-top' %> 
@@ -20,6 +21,8 @@
         </div>
   
      <% end %>
+   </div>
   <br>
 
 <%= link_to "Sell your gear", new_listing_path, class: 'btn btn-outline-dark'  %>
+<%= link_to "See all", listings_path, class: 'btn btn-outline-dark'  %>
