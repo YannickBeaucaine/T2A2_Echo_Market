@@ -44,8 +44,8 @@ class ListingsController < ApplicationController
     end
     # method to show details of listing activating Stripe
     def show
-        
-        stripe_session = Stripe::Checkout::Session.create( 
+       
+       if stripe_session = Stripe::Checkout::Session.create( 
          payment_method_types:['card'],
          client_reference_id: current_user.id,
          customer_email: current_user.email,
@@ -67,13 +67,15 @@ class ListingsController < ApplicationController
          cancel_url: "#{root_url}listings"
          )
          @session_id = stripe_session.id
-         
+        else
+            flash[:alert] = 'Your listing has been removed'
+        redirect_to listings_path
+        end
     end
     # method to delete listed item
     def destroy
         @listing.destroy
-        flash[:alert] = 'Your listing has been removed'
-        redirect_to listings_path
+        
     end
 
     
